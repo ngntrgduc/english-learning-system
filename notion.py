@@ -1,5 +1,6 @@
-import requests
 from dotenv import load_dotenv
+import requests
+import json
 import os
 
 load_dotenv()
@@ -22,9 +23,10 @@ def create(data: dict):
 def read_database(database_id):
     url = f"https://api.notion.com/v1/databases/{database_id}/query"
     data = requests.post(url, headers=headers).json()
-    # with open('data.json', 'w', encoding='utf8') as f:
-        # json.dump(data, f, ensure_ascii=False, indent=2)
+    with open('data.json', 'w', encoding='utf8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
     return data
+# read_database(DATABASE_ID)
 
 # def update(page_id: str, data: dict):
 #     url = f"https://api.notion.com/v1/pages/{page_id}"
