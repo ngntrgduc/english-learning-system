@@ -1,7 +1,7 @@
-from dotenv import load_dotenv
-import requests
-import json
 import os
+import json
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 NOTION_TOKEN = os.getenv('NOTION_TOKEN')
@@ -26,6 +26,7 @@ def read_database(database_id):
     with open('data.json', 'w', encoding='utf8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     return data
+
 # read_database(DATABASE_ID)
 
 # def update(page_id: str, data: dict):
