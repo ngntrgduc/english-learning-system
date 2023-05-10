@@ -26,8 +26,8 @@ def get_missing_pronounce():
     for i in range(len(data['results'])):
         pronounce = data['results'][i]['properties']['Pronounce']['rich_text']
         if not pronounce:
-            word = data['results'][i]['properties']['Name']['title'][0]['plain_text']
-            vocabs = vocabs + (word,)
+            vocab = data['results'][i]['properties']['Name']['title'][0]['plain_text']
+            vocabs = vocabs + (vocab,)
     return vocabs
 
 def update_pronounce():

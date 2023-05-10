@@ -3,7 +3,7 @@ import notion
 import random
 import cambridge
 from rich import print
-from utils.words import read
+from utils.vocabs import read
 from utils.tictoc import timing
 from pronounce import update_pronounce
 
