@@ -1,3 +1,4 @@
+"""Contain create, read and update database functions on Notion using Notion API"""
 import os
 import json
 import requests
@@ -22,8 +23,9 @@ def create(data: dict):
 def read_database(database_id):
     url = f"https://api.notion.com/v1/databases/{database_id}/query"
     data = requests.post(url, headers=headers).json()
-    # with open('data.json', 'w', encoding='utf8') as f:
-    #     json.dump(data, f, ensure_ascii=False, indent=2)
+    # with open('vocabs.json', 'w', encoding='utf8') as f:
+    #     json.dump(data, f, indent=2)
+    # f.close()
     return data
 
 def update(page_id: str, data: dict):

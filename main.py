@@ -1,29 +1,26 @@
-import cambridge
-import notion
-import thesaurus
-
-from rich import print
-import random
 import time
+import notion
+import random
+import cambridge
+from rich import print
+from utils.words import read
+from utils.tictoc import timing
+from pronounce import update_pronounce
 
-def split_word(words_list, delimiter=' '):
-    return [word.split(delimiter)[0].lower()
-            for word in words_list]
+def clear_file(file):
+    open(file, 'w').close()
+    pass
 
-# file = 'words.txt'
-# # file = 'misspelling.txt'
-# with open(file, 'r', encoding='utf-8') as f:
-#     raw = f.read()
-# f.close()
-# words_list = [word.strip() for word in raw.split("\n") 
-#               if len(word.strip()) > 0]
-# words = split_word(words_list, '|')
-# # print(words)
+@timing
+def main():
+    file = 'vocabs.txt'
+    vocabs = read(file)
+    for vocab in vocabs:
+        print(f'- {vocab}')
+        time.sleep(random.random() + 1)    
+        notion.create(cambridge.crawl(vocab))
 
-# for word in words:
-    # time.sleep(random.random()*1 + 1)
-    
-    # data = cambridge.crawl(word)
-    # print(data)
-    # notion.create(data)
-    # thesaurus.find(word)
+    clear_file(file)    
+    update_pronounce()
+
+main()
