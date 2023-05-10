@@ -1,4 +1,5 @@
 # English-learning-system
+My English learning system, with Notion.
 
 ## pronouce.py
 Contain functions to crawl vocabulary from database, find missing pronounce and update pronounce
@@ -20,8 +21,8 @@ Split vocabulary from words.txt
 (WIP) Learn vocabulary using flashcard-like in CLI
 
 ## utils
-- tictoc.py: timing code
-- words.py: read and format vocabulary from raw file
+- tictoc.py: Timing code
+- vocabs.py: Read and format vocabulary from raw file
 
 # TODO
 - [ ] CLI arguments
@@ -29,6 +30,8 @@ Split vocabulary from words.txt
 ## How to use
 - Create `.env` file with the following format:
 ```
-NOTION_TOKEN = <your notion token>
+USER_AGENT = <your user agent>
+NOTION_TOKEN = <your Notion token>
 VOCAB_DATABASE_ID = <your vocabulary database id>
 ```
+find user agent [here](https://www.google.com/search?q=find+user+agent)

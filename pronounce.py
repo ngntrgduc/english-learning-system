@@ -1,4 +1,5 @@
-"""Crawl vocabulary database on Notion and write to file, find missing pronounce and update"""
+"""Crawl vocabulary database on Notion and write to file,
+find missing pronounce and update"""
 import os
 import dotenv
 import time

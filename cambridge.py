@@ -1,13 +1,17 @@
+import os
 import re
 import requests
+from dotenv import load_dotenv
 from bs4 import BeautifulSoup
+
+load_dotenv()
 
 def crawl(vocab):
     """Crawl pronounce of vocabulary from Cambridge dictionary, 
     and return to json format for update to database"""
     url = f'https://dictionary.cambridge.org/dictionary/english/{vocab}'
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.44'
+        'User-Agent': os.getenv('USER_AGENT')
     }
     soup = requests.get(url, headers=headers).content
     page = BeautifulSoup(soup, 'lxml')
