@@ -19,7 +19,7 @@ def create(data: dict):
     requests.post(url, headers=headers, json=payload)
     pass
 
-def read_database(database_id):
+def read_database(database_id: str):
     url = f"https://api.notion.com/v1/databases/{database_id}/query"
     data = requests.post(url, headers=headers).json()
     return data

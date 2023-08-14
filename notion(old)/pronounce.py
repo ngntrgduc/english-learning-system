@@ -1,5 +1,6 @@
 """Crawl vocabulary database on Notion and write to file,
 find missing pronounce and update"""
+
 import os
 import dotenv
 import time
@@ -34,7 +35,8 @@ def get_missing_pronounce():
 def update_pronounce():
     """Update pronounce to database"""
     missing = get_missing_pronounce()
-    data = json.load(open('vocabs.json', 'r', encoding='utf-8'))
+    print(missing)
+    data = json.load(open('crawled.json', 'r', encoding='utf-8'))
     for i in range(len(data['results'])):
         vocab = data['results'][i]['properties']['Name']['title'][0]['plain_text']
         if vocab in missing:
@@ -42,10 +44,12 @@ def update_pronounce():
             page_id = data['results'][i]['id']
             time.sleep(random.random() + 1) # avoid blocking
             try:
-                notion.update(page_id, cambridge.crawl(vocab))
+                # notion.update(page_id, cambridge.crawl(vocab))
+                print(cambridge.crawl(vocab))
             except:
                 print(f'- Cannot update for "{vocab}"')
                 continue
     pass
 
-update_pronounce() 
+if __name__ == "__main__":
+    update_pronounce()

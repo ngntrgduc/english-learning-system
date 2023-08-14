@@ -1,37 +1,23 @@
 # English-learning-system
-My English learning system, with Notion.
-
-## pronouce.py
-Contain functions to crawl vocabulary from database, find missing pronounce and update pronounce
-
-## main.py
-- Read vocabulary from file, and push to Notion database
-- Crawl vocabulary database on Notion, find missing pronounce and update
-
-## notion.py
-Contain create, read and update database functions on Notion using Notion API
+My English learning system ~~for IELTS~~, with Anki (used to use Notion. But I realized that Notion is not for the long run because it's so laggy so I decided to switch to Anki).
 
 ## thesaurus.py
 Crawl synonyms from Thesaurus.com
-
-## split_vocab.py
-Split vocabulary from words.txt 
-
-## flashcard.py
-(WIP) Learn vocabulary using flashcard-like in CLI
 
 ## utils
 - tictoc.py: Timing code
 - vocabs.py: Read and format vocabulary from raw file
 
-# TODO
-- [ ] CLI arguments
-
 ## How to use
 - Create `.env` file with the following format:
 ```
 USER_AGENT = <your user agent>
-NOTION_TOKEN = <your Notion token>
-VOCAB_DATABASE_ID = <your vocabulary database id>
 ```
-find user agent [here](https://www.google.com/search?q=find+user+agent)
+You can find your user agent [here](https://www.google.com/search?q=find+user+agent)
+- Write all your vocabulary to `vocabs.txt`, if you don't have, create one.
+- `main.py` will crawl the pronounce of word and then write it to `result.txt`
+
+# TODO
+- [ ] Maybe create a chatbot for writing skill...
+
+### Happy learning 🐧
