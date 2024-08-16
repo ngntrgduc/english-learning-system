@@ -1,4 +1,4 @@
-"""Standalone. Find synonyms of vocab on Thesaurus.com"""
+"""Standalone. Crawl synonyms of vocab on thesaurus.com"""
 import requests
 from rich import print
 from rich.panel import Panel
@@ -15,6 +15,7 @@ def find(vocab):
     
     url = get_url(vocab)    
     colors = {
+        # The classes are deprecated and each vocab has different classes
         'css-1kg1yv8 eh475bn0': 'red', 
         'css-1gyuw4i eh475bn0': 'orange1',
         'css-1n6g4vv eh475bn0': 'yellow'
