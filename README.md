@@ -33,12 +33,11 @@ Now: I am working on the CLI version. Because opening a text file with 1k lines 
 ## How to use
 
 - Install dependencies:
-    - Python library
-    ```py
-    pip install requests dotenv beautifulsoup4 aiofiles tqdm
-    ```
-    - fzf
-
+    - Python library 
+    ```py
+    pip install requests dotenv beautifulsoup4 aiofiles tqdm
+    ```
+    - fzf
 - Create a `.env` file with the following format:
 ```
 USER_AGENT = <your user agent>
