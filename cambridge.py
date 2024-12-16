@@ -8,9 +8,7 @@ from logger import exception, info
 
 load_dotenv()
 
-headers = {
-    'User-Agent': os.getenv('USER_AGENT')
-}
+headers = {'User-Agent': os.getenv('USER_AGENT')}
 
 session = requests.Session()
 
