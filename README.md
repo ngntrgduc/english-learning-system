@@ -19,16 +19,16 @@ Now: I am working on the CLI version. Because opening a text file with 1k lines 
 - Not too slow crawling speed
 
 ## Structure
-- [`cambridge`](/cambridge.py): Crawl pronunciation of vocabulary from Crambridge Dictionary
-- [`main`](/main.py): Crawl the pronunciation of vocab and write to a file to import to Anki
+- [`cambridge.py`](/cambridge.py): Crawl pronunciation of vocabulary from Crambridge Dictionary
+- [`main.py`](/main.py): Crawl the pronunciation of vocab and write to a file to import to Anki
 - [`utils.py`](/utils.py): Timing code, Read and format vocabs from raw file, Clear file, Find duplicate vocabs
-    - The reason to format the file: I used Onetab, and when saving Cambridge page to Onetab, it has the following format: `<VOCAB> | English meaning - Cambridge Dictionary`, so I need to remove the part after `|`
+    - The reason to format the file: I used Onetab, and when saving Cambridge page to Onetab, it has the following format: `<VOCAB> | English meaning - Cambridge Dictionary`, so I need to remove the part after `|`
 - [`logger.py`](/logger.py): Just log to `runtime.log`
 - [`ludwigy.py`](/ludwigy.py) [***WIP***]: act like [Ludwig.guru](https://app.ludwig.guru/), no limitation
 - [`quizlet.py`](/quizlet.py): Just a small script to format the export result from Quizlet
-- [`deprecated`](/deprecated/): Folder contains some deprecated/old scripts:
-    - `notion`: Interact with Notion database using API, not sure if the code still works
-    - `thesaurus.py`: Crawl synonyms of vocab on thesaurus.com
+- [`deprecated/`](/deprecated/): Folder contains some deprecated/old scripts:
+    - `notion`: Interact with Notion database using API, not sure if the code still works
+    - `thesaurus.py`: Crawl synonyms of vocab on thesaurus.com
 
 ## How to use
 
@@ -51,12 +51,12 @@ You can find your user agent [here](https://www.google.com/search?q=find+user+ag
 - [x] Complete Roadmap story
 - [ ] Maybe create a chatbot for writing skills, checking grammar...
 - [ ] Rewrite it to CLI using Click + fzf
-    - [ ] convert it to a module?
-        - [ ]  namespace: `el`, stand for `e`lish `l`earning
-    - [ ]  fzf are cool but how about reimplement trie with auto suggestion =))
-        - [ ]  python + go lib: https://github.com/charmbracelet
-        - [ ]  or interactive python CLI? which library can do this?
-    - [ ]  n random vocabs + LLM to generate sentence for each vocab or the entire paragraph
+    - [ ] convert it to a module?
+        - [ ]  namespace: `el`, stand for `e`lish `l`earning
+    - [ ]  fzf are cool but how about reimplement trie with auto suggestion =))
+        - [ ]  python + go lib: https://github.com/charmbracelet
+        - [ ]  or interactive python CLI? which library can do this?
+    - [ ]  n random vocabs + LLM to generate sentence for each vocab or the entire paragraph
 - [ ] how bout this: https://tqdm.github.io/docs/asyncio/
 - [ ] restructure folder, and files. Seem a bit messy
 
