@@ -11,12 +11,11 @@ Soon, I realized Notion is too laggy for me when the database is large, not for 
 
 But since I watched [this](https://www.youtube.com/watch?v=--Hu2w0s72Y), I decided to take a different approach...
 
-Now: I am working on the CLI version. Because opening a text file with 1k lines seems ineffective...
+Now: I am working on the CLI version. Because opening a text file with 1k lines seems ineffective in VSCode...
 
 
 ## Features
-- No more time-consuming for `Ctrl + C`, `Ctrl + V` vocab pronunciations
-- Not too slow crawling speed
+- Crawl vocabs pronunciation
 
 ## Structure
 - [`cambridge.py`](/cambridge.py): Crawl pronunciation of vocabulary from Crambridge Dictionary
@@ -32,35 +31,43 @@ Now: I am working on the CLI version. Because opening a text file with 1k lines 
 
 ## How to use
 
-- Install dependencies:
-    - Python library 
-    ```py
-    pip install requests dotenv beautifulsoup4 aiofiles tqdm
-    ```
-    - fzf
-- Create a `.env` file with the following format:
+Install dependencies:
+- Python library 
+```py
+pip install requests dotenv beautifulsoup4 aiofiles tqdm rich
+```
+- fzf
+
+Create a `.env` file with the following format:
 ```
 USER_AGENT = <your user agent>
 ```
 You can find your user agent [here](https://www.google.com/search?q=find+user+agent)
 - Write all your vocabulary to `vocabs.txt` (create if you don't have it).
 - `main.py` will crawl the pronunciation of the word and then write it to `result.txt`
-    - If you want to crawl vocab definition, take a look at [mhwgoo/cambridge](https://github.com/mhwgoo/cambridge). I can't implement the crawl definition feature 🥲.
+- If you want to crawl vocab definition, take a look at [mhwgoo/cambridge](https://github.com/mhwgoo/cambridge). I can't implement the crawl definition feature 🥲.
 
 ## TODO
 - [x] Complete Roadmap story
-- [ ] Maybe create a chatbot for writing skills, checking grammar...
+- [ ] Create a chatbot for writing skills, checking grammar...
+    - [ ] Mistral? find model specific for english learning, or finetune it...
+- [ ] Convert to database? does it faster?
 - [ ] Rewrite it to CLI using Click + fzf
     - [ ] convert it to a module?
-        - [ ]  namespace: `el`, stand for `e`lish `l`earning
-    - [ ]  fzf are cool but how about reimplement trie with auto suggestion =))
+    - [ ] implement trie with auto suggestion instead of fzf?
         - [ ]  python + go lib: https://github.com/charmbracelet
-        - [ ]  or interactive python CLI? which library can do this?
-    - [ ]  n random vocabs + LLM to generate sentence for each vocab or the entire paragraph
-- [ ] how bout this: https://tqdm.github.io/docs/asyncio/
-- [ ] restructure folder, and files. Seem a bit messy
+        - [ ]  or interactive python CLI? REPL?
+    - [ ] n random vocabs + LLM to generate sentence/paragraph for given vocab
+        - [ ] Call Gemini API?
+- [ ] restructure folder, and files
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)
+- [Dictionary Look Up](https://github.com/ngntrgduc/Dictionary-Look-Up): Browser extension for quickly look up for vocabs.
+- [The Best (and Worst) IELTS Websites - TED IELTS](https://ted-ielts.com/ielts-website-review/)
+
+For Vietnamese:
+- https://www.tuhocielts.online/
+- https://study4.com/
 
 ### Happy learning 🐧
