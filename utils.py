@@ -34,10 +34,8 @@ def find_duplicate(file_name: str) -> List[str]:
     counter = Counter(read(file_name))
     return [word for word, count in counter.items() if count > 1]
 
-def clear_file(file_name: str):
-    """Clear file"""
+def clear_file(file_name: str) -> None:
     open(file_name, 'w').close()
-    return
 
 if __name__ == '__main__':
     # Mispelling processing
