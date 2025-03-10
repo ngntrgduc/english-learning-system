@@ -5,7 +5,7 @@ import re
 
 from rich_format import text_blue, text_red
 
-vocabs_file_name = 'vocabs.txt'
+vocabs_file_name = 'data/vocabs.txt'
 with open(vocabs_file_name, 'r', encoding='utf-8') as f:
     data = f.read().splitlines()
 
@@ -46,6 +46,13 @@ def check_valid_range(number: int) -> None:
     if number < 1 or number > length:
         raise ValueError('Invalid number')
 
+def is_valid_vocab(vocab: str) -> bool:
+    if re.findall(r'[^\sa-zA-Z]', vocab):
+        print(f' - Invalid vocab: {text_red(vocab)}')
+        return False
+    
+    return True
+
 @main.command()
 @click.argument('number', type=int, default=5)
 def random( number: int) -> None:
@@ -84,8 +91,7 @@ def check() -> None:
 @click.argument('vocab', type=str)
 def add(vocab: str) -> None:
     """Add a vocab to file."""
-    if re.findall(r'[^\sa-zA-Z]', vocab):
-        print(f' - Invalid vocab: {text_red(vocab)}')
+    if not is_valid_vocab(vocab):
         return
 
     if vocab in data:
