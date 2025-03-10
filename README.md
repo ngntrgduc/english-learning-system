@@ -19,12 +19,14 @@ Now: I am working on the CLI version. Because opening a text file with 1k lines 
 
 ## Structure
 - [`cambridge.py`](/cambridge.py): Crawl pronunciation of vocabulary from Crambridge Dictionary
-- [`main.py`](/main.py): Crawl the pronunciation of vocab and write to a file to import to Anki
-- [`utils.py`](/utils.py): Timing code, Read and format vocabs from raw file, Clear file, Find duplicate vocabs
-    - The reason to format the file: I used Onetab, and when saving Cambridge page to Onetab, it has the following format: `<VOCAB> | English meaning - Cambridge Dictionary`, so I need to remove the part after `|`
-- [`logger.py`](/logger.py): Just log to `runtime.log`
+- [`el.py`](/el.py) [***WIP***]: CLI tool to learn English
+- [`logger.py`](/logger.py): Log information to `runtime.log`
 - [`ludwigy.py`](/ludwigy.py) [***WIP***]: act like [Ludwig.guru](https://app.ludwig.guru/), no limitation
-- [`quizlet.py`](/quizlet.py): Just a small script to format the export result from Quizlet
+- [`main.py`](/main.py): Crawl the pronunciation of vocab and write to a file to import to Anki
+- [`quizlet.py`](/quizlet.py): Small script to format the exported result from Quizlet
+- [`rich_format.py`](/rich_format.py): Format text for rich library
+- [`utils.py`](/utils.py): Timing code, Read and format vocabs from raw file, Clear file, Find duplicate vocabs
+    - The reason to format: I used Onetab, and when saving Cambridge page to Onetab, it has the following format: `<VOCAB> | English meaning - Cambridge Dictionary`, so I need to remove the part after `|`
 - [`deprecated/`](/deprecated/): Folder contains some deprecated/old scripts:
     - `notion`: Interact with Notion database using API, not sure if the code still works
     - `thesaurus.py`: Crawl synonyms of vocab on thesaurus.com
@@ -34,7 +36,7 @@ Now: I am working on the CLI version. Because opening a text file with 1k lines 
 Install dependencies:
 - Python library 
 ```py
-pip install requests dotenv beautifulsoup4 aiofiles tqdm rich
+pip install requests dotenv beautifulsoup4 aiofiles tqdm rich click
 ```
 - fzf
 

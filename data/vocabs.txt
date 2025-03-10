@@ -881,7 +881,7 @@ ornate
 nauseous
 concussion
 exotic
-tainted	None
+tainted
 devoid
 sentiment
 breezy
@@ -896,7 +896,7 @@ seize
 demystify
 whiny
 insecure
-vaporizing	None
+vaporizing
 manipulative
 fallacy
 repercussion
@@ -904,7 +904,6 @@ encompass
 devastated
 catastrophe
 indeed
-insecure
 counterproductive
 inadvertent
 unappreciated
@@ -977,7 +976,6 @@ optimistic
 pessimistic
 punctual
 sturdy
-sentiment
 eccentric
 obnoxious
 anticlimactic
@@ -1004,3 +1002,42 @@ cuisine
 contented
 consensus
 immaculate
+synthesis
+perpetual
+staggering
+deteriorate
+formidable
+detritus
+merit
+cease
+excerpt
+nimble
+preach
+finesse
+pester
+substantial
+jurisdiction
+commence
+awestruck
+extant
+lustrous
+exuberant
+prodigal
+ferocious
+disparate
+propensity
+ordeal
+drawn
+discretion
+rudimentary
+laureate
+entrust
+notorious
+fickle
+majestic
+defer
+bog
+outstrip
+demure
+seniority
+sadden
