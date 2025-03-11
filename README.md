@@ -6,46 +6,66 @@ At first, I used Notion to store vocabulary as a database, grammar, writing tips
 I also coded the [antonym/synonym crawling](/deprecated/thesaurus.py) from [Thesaurus.com](https://www.thesaurus.com/), and beautified the result in the console using `rich` library.
 
 Then, I realized Notion is too laggy for me when the database is large, not for the long run. 
-So I switched to Anki, taking the advantage of Space repetition method. I [crawl vocab pronunciations](/deprecated/main.py) (reduce crawling time using `asyncio`), and import it to Anki with [my custom template](/anki_template.html). 
+So I switched to [Anki](https://apps.ankiweb.net/), taking the advantage of Space repetition method. I [crawl vocab pronunciations](/deprecated/main.py) (reduce crawling time using `asyncio`), and import it to Anki with [my custom template](/anki_template.html). 
 
-But since I watched [this video](https://www.youtube.com/watch?v=--Hu2w0s72Y), I decided to take a different approach...
+But since I watched [this video](https://www.youtube.com/watch?v=--Hu2w0s72Y), I decided to take a different approach.
 
-**Now**: I've been working on the CLI version. Because opening a text file with 1k lines seems ineffective in VSCode...
+**Now**: I've been working on the CLI + LLM ([Gemini](https://ai.google.dev/gemini-api/docs)) version...
 
 ## Structure
-- `el.py` [***WIP***]: CLI tool to list vocabs
-- `ludwigy.py` [***WIP***]: act like [Ludwig.guru](https://app.ludwig.guru/), no limitation
-- `rich_format.py`: Format text for rich library
-- `utils.py`: Timing code, Read and format vocabs from raw file, Clear file, Find duplicate vocabs
+- `el.py`: CLI tool to learn English
+- `ludwigy.py` [***WIP***]: Act like [Ludwig.guru](https://app.ludwig.guru/), no limitation
+- `utils/`: Timing code, Read and format vocabs from raw file, Clear file, Find duplicate vocabs, Format vocab
 
-### Deprecated
-Folder [`deprecated/`](/deprecated/) contains some deprecated/old scripts:
+Folder `deprecated/` contains some deprecated/old scripts:
 - `notion/`: Interact with Notion database using API, not sure if the code still works
 - `cambridge.py`: Crawl pronunciation of vocabulary from Crambridge Dictionary
 - `logger.py`: Log information to `runtime.log`
 - `main.py`: Crawl the pronunciation of vocabs from a file and write the results to a file for import into Anki
 - `quizlet.py`: Small script to format the exported result from Quizlet
-- `thesaurus.py`: Crawl synonyms of vocab on thesaurus.com
+- `thesaurus.py`: Crawl synonyms of vocab on https://www.thesaurus.com/
 
 ## How to use
+- Install dependencies:
+    - Python libraries
+        ```py
+        pip install rich click dotenv google-genai
+        ```
+    - fzf
+- [Create Gemini API key](https://ai.google.dev/gemini-api/docs/api-key)
+- Create `.env` file and store your API key
 
-Install dependencies:
-- Python library 
-```py
-pip install rich click
 ```
-- fzf
+> py el.py
+Usage: el.py [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+
+Options:
+  -h, --help  Show this message and exit.
+
+Commands:
+  add     Add a vocab to file.
+  char    Print all vocabs start with a character.
+  check   Check vocab file.
+  delete  Delete a vocab in file.
+  head    'head' functionality.
+  llm     Cenerate sentences/paragraphs with given vocab, using Gemini
+  random  Get random vocabs.
+  stat    Show vocab statistics.
+  tail    'tail' functionality.
+```
 
 ## TODO
 - [ ] Create a chatbot for writing skills, checking grammar...
     - [ ] Mistral? find model specific for english learning, or finetune it...
 - [ ] Convert to database? does it faster?
-- [ ] Rewrite it to CLI using Click + fzf
+- [x] Rewrite it to CLI using Click 
+    - [ ] Integrate fzf
     - [ ] convert it to a module?
     - [ ] implement trie with auto suggestion instead of fzf?
     - [ ] REPL mode?
-    - [ ] n random vocabs + LLM to generate sentence/paragraph for given vocab
-        - [ ] Call Gemini API?
+    - [x] LLM to generate sentence/paragraph for given vocab
+        - [x] Call Gemini API?
+    - [ ] chat interface?
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)
