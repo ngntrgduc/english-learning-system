@@ -1,9 +1,11 @@
 from random import sample
 import click
 from rich import print
-import re
+from rich.console import Console
+from rich.markdown import Markdown
 
-from rich_format import text_blue, text_red
+from utils.print import text_blue, text_red, print_vocabs
+from utils.vocab import find_duplicate, is_valid_vocab
 
 data_folder = 'data'
 vocabs_file_name = 'vocabs.txt'
@@ -13,82 +15,45 @@ with open(vocabs_file_path, 'r', encoding='utf-8') as f:
 
 vocab_length = len(data)
 
-def write(file_name: str, data: list[str]) -> None:
-    with open(file_name, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(data))
-
 # changes the default parameters to -h and --help instead of just --help
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(
     context_settings=CONTEXT_SETTINGS, 
     invoke_without_command=True, 
     no_args_is_help=True, 
-    # chain=True,
+    chain=True,
 )
-# @click.pass_context
-# def main(ctx):
-def main():
-    # ctx.ensure_object(dict)
-    # ctx.obj.setdefault('data', data)
-    return
-
-def print_vocabs(vocabs: list[str]) -> None:
-    """Print vocabs with link to Cambridge dictionary"""
-    if not isinstance(vocabs, list):
-        raise ValueError('Require list of vocabs')
-
-    def format(vocab: str) -> str:
-        return vocab.strip().replace(' ', '-')
-    
-    url = 'https://dictionary.cambridge.org/dictionary/english/'
-    for vocab in vocabs:
-        print(f' - [link={url}{format(vocab)}]{vocab}[/link]')
+@click.pass_context
+def main(ctx):
+    ctx.ensure_object(dict)
+    ctx.obj.setdefault('data', data)
+    ctx.obj.setdefault('print', False)
 
 def check_valid_range(number: int) -> None:
+    assert isinstance(number, int), 'Number must be integer'
     if number < 1 or number > vocab_length:
-        raise ValueError('Invalid number')
-
-def is_valid_vocab(vocab: str) -> bool:
-    if re.findall(r'[^\sa-zA-Z]', vocab):
-        print(f' - Invalid vocab: {text_red(vocab)}')
-        return False
-    
-    return True
+        raise ValueError('Invalid number range.')
 
 @main.command()
 @click.argument('number', type=int, default=5)
-def random( number: int) -> None:
-    """Get random vocabs. Default: 5 vocabs."""
+@click.pass_context
+def random(ctx, number: int) -> None:
+    """Get random vocabs."""
     check_valid_range(number)
-    print_vocabs(sample(data, number))
-    # obj['data'] = sample(data, number)
+    ctx.obj['data'] = sample(ctx.obj['data'], number)
+    ctx.obj['print'] = True
 
 @main.command()
 def check() -> None:
-    """Check vocabs file."""
-    
+    """Check vocab file."""
     print('Checking duplicated vocabs...')
-    s = set()
-    has_duplicated = False
-    for vocab in data:
-        if vocab in s:
-            has_duplicated = True
-            print(f' - {vocab}')
-        s.add(vocab)
-
-    if not has_duplicated:
-        print(' - No duplicated vocabs.')
+    print(find_duplicate(data))
 
     print('Checking invalid vocabs...')
-    has_invalid = False
     for vocab in data:
         if vocab[0].isupper():
-            print(f' - Invalid vocab: {vocab}')
-            has_invalid = True
-        
-    if not has_invalid:
-        print(' - No invalid vocabs.')
-
+            print(f' - {text_red(vocab)}')
+ 
 @main.command()
 @click.argument('vocab', type=str)
 def add(vocab: str) -> None:
@@ -107,12 +72,13 @@ def add(vocab: str) -> None:
 
 @main.command()
 def stat() -> None:
-    """Provide statistics."""
+    """Show vocab statistics."""
     print(f' - Total vocabs: {vocab_length}')
 
 @main.command()
 @click.argument('character', type=str)
-def char(character: str) -> None:
+@click.pass_context
+def char(ctx, character: str) -> None:
     """Print all vocabs start with a character."""
     assert len(character) == 1, 'Invalid character'
     assert character.isalpha(), 'Character must be in the alphabet'
@@ -122,48 +88,84 @@ def char(character: str) -> None:
     if not list_vocabs:
         print(f' - There are no vocabs started with {text_blue(character)}')
     else:
-        print_vocabs(sorted(list_vocabs))
+        ctx.obj['print'] = True
+        ctx.obj['data'] = sorted(list_vocabs)
 
 @main.command()
+@click.argument('vocab', type=str)
 def delete(vocab: str) -> None:
     """Delete a vocab in file."""
     if vocab in data:
         data.remove(vocab)
+        print(f' - Removed {text_blue(vocab)} in {vocabs_file_path}.')
     else:
-        print(f"Couldn't find {vocab} in file.")
+        print(f" - Couldn't find {text_red(vocab)} in {vocabs_file_path}.")
 
 @main.command()
 @click.argument('number', type=int, default=5)
-# @click.pass_obj
-# def head(obj, number: int) -> None:
-def head(number: int) -> None:
-    """'head' functionality"""
+@click.pass_context
+def head(ctx, number: int) -> None:
+    """'head' functionality."""
     check_valid_range(number)
-    print_vocabs(data[:number])
-
-    # ctx.obj['data'] = ctx.obj['data'][:number]
-    # print_vocabs(ctx.obj['filtered_data'])
+    ctx.obj['data'] = ctx.obj['data'][:number]
+    ctx.obj['print'] = True
 
 @main.command()
 @click.argument('number', type=int, default=5)
-# @click.pass_obj
-# def tail(obj, number: int) -> None:
-def tail(number: int) -> None:
-    """'tail' functionality"""
+@click.pass_context
+def tail(ctx, number: int) -> None:
+    """'tail' functionality."""
     check_valid_range(number)
-    print_vocabs(data[-number:])
+    ctx.obj['data'] = ctx.obj['data'][-number:]
+    ctx.obj['print'] = True
 
-    # ctx.obj['data'] = ctx.obj['data'][-number:]
-    # print_vocabs(ctx.obj['data'])
+@main.result_callback()
+@click.pass_obj
+def print_to_console(obj, result, *args, **kwargs) -> None:
+    if obj['print']:
+        print_vocabs(obj['data'])
 
+@main.command()
+@click.pass_obj
+def llm(obj) -> None:
+    """Cenerate sentences/paragraphs with given vocab, using Gemini"""
+    if len(obj['data']) == vocab_length:
+        print('No vocab were given.')
+        return
 
-# @main.result_callback()
-# @click.pass_context
-# def print_results(ctx, result, *args, **kwargs) -> None:
-#     if ctx.obj['data'] == data:
-#         return
-#     else:
-#         print_vocabs(ctx.obj['data'])
+    if obj['print']:
+        print_vocabs(obj['data'])
+        obj['print'] = False
+
+    if len(obj['data']) > 5:
+        print(f"{text_red('The number of vocab is large (>5)')}, would you want to continue? [y/N]:")
+        answer = input()
+        if answer.lower() == 'n':
+            return
+        if answer.lower() != 'y':
+            return
+
+    from google import genai
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+    GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    response = client.models.generate_content(
+        model='gemini-2.0-flash', 
+        contents=f"""{obj['data']}
+
+        With this given list of vocabulary, provide the definition, word form, 
+        and generate 3 sentences using it, with grammartically correct.
+        Also wrap the given vocabulary in the result with square bracket, bold and italic format. 
+        Remember not to response with irrelevant information.
+        """
+    )
+    console = Console(width=90)
+    console.rule()
+    console.print(Markdown(response.text))
+
 
 if __name__ == '__main__':
     main()
