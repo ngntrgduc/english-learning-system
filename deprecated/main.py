@@ -7,7 +7,7 @@ import asyncio
 import aiofiles
 from tqdm import tqdm
 
-import cambridge
+import deprecated.cambridge as cambridge
 from utils import read, clear_file
 import logger
 
