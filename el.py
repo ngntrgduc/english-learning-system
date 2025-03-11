@@ -5,11 +5,13 @@ import re
 
 from rich_format import text_blue, text_red
 
-vocabs_file_name = 'data/vocabs.txt'
-with open(vocabs_file_name, 'r', encoding='utf-8') as f:
+data_folder = 'data'
+vocabs_file_name = 'vocabs.txt'
+vocabs_file_path = f'{data_folder}/{vocabs_file_name}'
+with open(vocabs_file_path, 'r', encoding='utf-8') as f:
     data = f.read().splitlines()
 
-length = len(data)
+vocab_length = len(data)
 
 def write(file_name: str, data: list[str]) -> None:
     with open(file_name, 'w', encoding='utf-8') as f:
@@ -43,7 +45,7 @@ def print_vocabs(vocabs: list[str]) -> None:
         print(f' - [link={url}{format(vocab)}]{vocab}[/link]')
 
 def check_valid_range(number: int) -> None:
-    if number < 1 or number > length:
+    if number < 1 or number > vocab_length:
         raise ValueError('Invalid number')
 
 def is_valid_vocab(vocab: str) -> bool:
@@ -95,18 +97,18 @@ def add(vocab: str) -> None:
         return
 
     if vocab in data:
-        print(f' - {text_blue(vocab)} already exists in {vocabs_file_name}.')
+        print(f' - {text_blue(vocab)} already exists in {vocabs_file_path}.')
         return
     
     vocab = vocab.strip().lower()
-    with open(vocabs_file_name, 'a', encoding='utf-8') as f:
+    with open(vocabs_file_path, 'a', encoding='utf-8') as f:
         f.write(f'{vocab}\n')
-        print(f' - Added {text_blue(vocab)} to {vocabs_file_name}')
+        print(f' - Added {text_blue(vocab)} to {vocabs_file_path}')
 
 @main.command()
 def stat() -> None:
     """Provide statistics."""
-    print(f' - Total vocabs: {length}')
+    print(f' - Total vocabs: {vocab_length}')
 
 @main.command()
 @click.argument('character', type=str)
