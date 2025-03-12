@@ -6,6 +6,7 @@ from rich.markdown import Markdown
 
 from utils.print import text_blue, text_red, print_vocabs
 from utils.vocab import find_duplicate, is_valid_vocab
+from utils.fzf import fzf
 
 data_folder = 'data'
 vocabs_file_name = 'vocabs.txt'
@@ -78,9 +79,8 @@ def stat() -> None:
 @main.command()
 @click.argument('character', type=str)
 @click.pass_context
-def char(ctx, character: str) -> None:
-    """Print all vocabs start with a character."""
-    assert len(character) == 1, 'Invalid character'
+def start(ctx, character: str) -> None:
+    """List all vocabs start with some character."""
     assert character.isalpha(), 'Character must be in the alphabet'
 
     character = character.lower()
@@ -92,14 +92,38 @@ def char(ctx, character: str) -> None:
         ctx.obj['data'] = sorted(list_vocabs)
 
 @main.command()
-@click.argument('vocab', type=str)
-def delete(vocab: str) -> None:
-    """Delete a vocab in file."""
-    if vocab in data:
-        data.remove(vocab)
-        print(f' - Removed {text_blue(vocab)} in {vocabs_file_path}.')
-    else:
-        print(f" - Couldn't find {text_red(vocab)} in {vocabs_file_path}.")
+def delete() -> None:
+    """Delete a vocab using fzf."""
+    def _delete():
+        for vocab in data:
+            print(vocab, flush=True)
+    
+    selected_vocab = fzf(_delete)
+    if not selected_vocab:
+        return
+
+    with open(vocabs_file_path, 'w', encoding='utf-8') as f:
+        for vocab in data:
+            if selected_vocab == vocab:
+                continue
+
+            f.write(f'{vocab}\n')
+
+        print(f" - Removed '{selected_vocab}' in {vocabs_file_path}.")
+
+@main.command()
+@click.pass_context
+def find(ctx) -> None:
+    """Find vocabs using fzf."""
+    def _find():
+        for vocab in data:
+            print(vocab, flush=True)
+
+    vocab = fzf(_find)
+    if not vocab:
+        return
+    ctx.obj['data'] = [vocab]
+    ctx.obj['print'] = True
 
 @main.command()
 @click.argument('number', type=int, default=5)
@@ -128,7 +152,7 @@ def print_to_console(obj, result, *args, **kwargs) -> None:
 @main.command()
 @click.pass_obj
 def llm(obj) -> None:
-    """Cenerate sentences/paragraphs with given vocab, using Gemini"""
+    """Cenerate sentences/paragraphs with given vocabs using Gemini."""
     if len(obj['data']) == vocab_length:
         print('No vocab were given.')
         return
@@ -156,15 +180,24 @@ def llm(obj) -> None:
         model='gemini-2.0-flash', 
         contents=f"""{obj['data']}
 
-        With this given list of vocabulary, provide the definition, word form, 
-        and generate 3 sentences using it, with grammartically correct.
-        Also wrap the given vocabulary in the result with square bracket, bold and italic format. 
+        With this given list of vocabulary, provide with grammartically correct: 
+        - the definition with its word form in parentheses ()
+        - 3 sentences using it
+    
+        Also wrap the given vocabulary in the result with square bracket, bold and italic format (***). 
         Remember not to response with irrelevant information.
         """
     )
     console = Console(width=90)
     console.rule()
     console.print(Markdown(response.text))
+    console.rule()
+
+def chat() -> None:
+    # I want you to act like Ludwig.guru site to help me write better English. 
+    # Provide me contextual examples of how words and phrases are used with reliable sources from now on. 
+    # https://ai.google.dev/gemini-api/docs/text-generation?lang=python#chat
+    return
 
 
 if __name__ == '__main__':

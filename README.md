@@ -6,7 +6,7 @@ At first, I used Notion to store vocabulary as a database, grammar, writing tips
 I also coded the [antonym/synonym crawling](/deprecated/thesaurus.py) from [Thesaurus.com](https://www.thesaurus.com/), and beautified the result in the console using `rich` library.
 
 Then, I realized Notion is too laggy for me when the database is large, not for the long run. 
-So I switched to [Anki](https://apps.ankiweb.net/), taking the advantage of Space repetition method. I [crawl vocab pronunciations](/deprecated/main.py) (reduce crawling time using `asyncio`), and import it to Anki with [my custom template](/anki_template.html). 
+So I switched to [Anki](https://apps.ankiweb.net/), taking the advantage of Space repetition method. I [crawled vocab pronunciations](/deprecated/main.py) (reduced crawling time using `asyncio`), and imported it to Anki with [my custom Anki template](/anki_template.html). 
 
 But since I watched [this video](https://www.youtube.com/watch?v=--Hu2w0s72Y), I decided to take a different approach.
 
@@ -31,7 +31,7 @@ Folder `deprecated/` contains some deprecated/old scripts:
         ```py
         pip install rich click dotenv google-genai
         ```
-    - fzf
+    - [fzf](https://github.com/junegunn/fzf)
 - [Create Gemini API key](https://ai.google.dev/gemini-api/docs/api-key)
 - Create `.env` file and store your API key
 
@@ -59,7 +59,7 @@ Commands:
     - [ ] Mistral? find model specific for english learning, or finetune it...
 - [ ] Convert to database? does it faster?
 - [x] Rewrite it to CLI using Click 
-    - [ ] Integrate fzf
+    - [x] Integrate fzf
     - [ ] convert it to a module?
     - [ ] implement trie with auto suggestion instead of fzf?
     - [ ] REPL mode?
