@@ -1,4 +1,6 @@
 from rich import print
+from rich.console import Console
+from rich.markdown import Markdown
 
 def text_blue(text: str) -> str:
     """Return blue format in rich library."""
@@ -23,3 +25,10 @@ def print_vocabs(vocabs: list[str] | str) -> None:
  
     for vocab in vocabs:
         print(link(vocab))
+
+def print_console(text: str) -> None:
+    """Print markdown format to console, used for llm response"""
+    console = Console(width=90)
+    console.rule()
+    console.print(Markdown(text))
+    console.rule()
