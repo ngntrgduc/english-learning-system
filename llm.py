@@ -8,8 +8,8 @@ from utils.print import print_vocabs, print_console, text_red
 
 load_dotenv()
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-model = 'gemini-2.0-flash'
 client = genai.Client(api_key=GEMINI_API_KEY)
+model = 'gemini-2.0-flash'
 
 def is_valid_obj(obj: dict) -> bool:
     """Check before perform API calling."""
@@ -57,7 +57,7 @@ def llm(obj) -> None:
 @click.argument('prompt', type=str, default='')
 @click.pass_obj
 def prompt_command(obj, prompt) -> None:
-    """Prompt whatever you want"""
+    """Prompt whatever you want."""
     if not prompt:
         prompt = input('user> ')
 
@@ -86,6 +86,6 @@ def definition(obj) -> None:
     response = client.models.generate_content(
         model=model, 
         contents=f"""{obj['data']},
-        With given vocabs, provide English definition and (word form)"""
+        With given vocabs, provide English definition and word form next to the word, in parentheses"""
     )
     print_console(response.text)
