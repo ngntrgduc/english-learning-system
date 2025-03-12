@@ -8,14 +8,18 @@ def text_red(text: str) -> str:
     """Return red format in rich library."""
     return f'[red]{text}[/red]'
 
-def print_vocabs(vocabs: list[str]) -> None:
+def print_vocabs(vocabs: list[str] | str) -> None:
     """Print vocabs with link to Cambridge dictionary"""
+    def link(vocab) -> str:
+        url = 'https://dictionary.cambridge.org/dictionary/english/'
+        return f' - [link={url}{vocab.strip().replace(' ', '-')}]{vocab}[/link]'
+    
+    if isinstance(vocabs, str):
+        print(link(vocabs))
+        return
+
     if not isinstance(vocabs, list):
         raise ValueError('Require list of vocabs')
-
-    def format(vocab: str) -> str:
-        return vocab.strip().replace(' ', '-')
-    
-    url = 'https://dictionary.cambridge.org/dictionary/english/'
+ 
     for vocab in vocabs:
-        print(f' - [link={url}{format(vocab)}]{vocab}[/link]')
+        print(link(vocab))
