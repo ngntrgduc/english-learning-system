@@ -33,7 +33,7 @@ Folder `deprecated/` contains some deprecated/old scripts:
         ```
     - [fzf](https://github.com/junegunn/fzf)
 - [Create Gemini API key](https://ai.google.dev/gemini-api/docs/api-key)
-- Create `.env` file and store your API key
+- Create `.env` file and store your API key with format: **`GEMINI_API_KEY = '<your_api_key>'`**
 
 ```
 > py el.py
@@ -44,28 +44,29 @@ Options:
 
 Commands:
   add     Add a vocab to file.
-  char    Print all vocabs start with a character.
   check   Check vocab file.
-  delete  Delete a vocab in file.
+  delete  Delete a vocab using fzf.
+  find    Find vocabs using fzf.
   head    'head' functionality.
-  llm     Cenerate sentences/paragraphs with given vocab, using Gemini
+  llm     Cenerate sentences/paragraphs with given vocabs using Gemini.
   random  Get random vocabs.
+  start   List all vocabs start with some character.
   stat    Show vocab statistics.
   tail    'tail' functionality.
 ```
 
 ## TODO
 - [ ] Create a chatbot for writing skills, checking grammar...
-    - [ ] Mistral? find model specific for english learning, or finetune it...
+    - [ ] find a model specific for english learning, or finetune it...
 - [ ] Convert to database? does it faster?
 - [x] Rewrite it to CLI using Click 
     - [x] Integrate fzf
-    - [ ] convert it to a module?
-    - [ ] implement trie with auto suggestion instead of fzf?
+    - [ ] convert it to a module? with `uv` for faster installation
+    - [ ] split commands into different files
+    - [ ] ~~implement trie with auto suggestion instead of fzf?~~ -> Overengineering, fzf already did this
     - [ ] REPL mode?
     - [x] LLM to generate sentence/paragraph for given vocab
         - [x] Call Gemini API?
-    - [ ] chat interface?
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)
