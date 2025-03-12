@@ -43,16 +43,18 @@ Options:
   -h, --help  Show this message and exit.
 
 Commands:
-  add     Add a vocab to file.
-  check   Check vocab file.
-  delete  Delete a vocab using fzf.
-  find    Find vocabs using fzf.
-  head    'head' functionality.
-  llm     Cenerate sentences/paragraphs with given vocabs using Gemini.
-  random  Get random vocabs.
-  start   List all vocabs start with some character.
-  stat    Show vocab statistics.
-  tail    'tail' functionality.
+  add         Add a vocab to file.
+  check       Check vocab file.
+  definition  Get definition of vocab.
+  delete      Delete a vocab using fzf.
+  find        Find vocabs using fzf.
+  head        'head' functionality.
+  llm         Definition, word form, and sentences with given vocabs.
+  prompt      Prompt whatever you want
+  random      Get random vocabs.
+  start       List all vocabs start with some character.
+  stat        Show vocab statistics.
+  tail        'tail' functionality.
 ```
 
 ## TODO
