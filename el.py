@@ -162,9 +162,10 @@ def print_to_console(obj, result, *args, **kwargs) -> None:
 
 if __name__ == '__main__':
     # LLM commands
-    from llm import llm, prompt_command, definition
+    from llm import llm, prompt_command, definition, paragraph
     main.add_command(llm)
     main.add_command(prompt_command)
     main.add_command(definition)
+    main.add_command(paragraph)
 
     main()

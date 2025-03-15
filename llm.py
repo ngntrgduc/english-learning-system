@@ -104,3 +104,24 @@ def definition(obj) -> None:
         With given vocabs, provide English definition and word form next to the word, in parentheses"""
     )
     print_console(response.text)
+
+@click.command()
+@click.pass_obj
+def paragraph(obj) -> None:
+    """Generate a paragraph with given vocab."""
+    from google import genai
+    from utils.print import print_console
+
+    if not is_valid_obj(obj):
+        return
+
+    GEMINI_API_KEY = get_api_key()
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    response = client.models.generate_content(
+        model=model, 
+        contents=f"""{obj['data']},
+        With given vocabs, provide a paragraph contain all the vocabs in it, with best coherence.
+        Also wrap the given vocabulary in the result with square bracket, bold and italic format (***). 
+        Remember not to response with irrelevant information."""
+    )
+    print_console(response.text)

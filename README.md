@@ -36,7 +36,7 @@ Folder `deprecated/` contains some deprecated/old scripts:
 - Create `.env` file and store your API key with format: **`GEMINI_API_KEY = '<your_api_key>'`**
 
 ```
-> py el.py
+ py el.py
 Usage: el.py [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
 Options:
@@ -50,7 +50,8 @@ Commands:
   find        Find vocabs using fzf.
   head        'head' functionality.
   llm         Definition, word form, and sentences with given vocabs.
-  prompt      Prompt whatever you want
+  paragraph   Generate a paragraph with given vocab.
+  prompt      Prompt whatever you want.
   random      Get random vocabs.
   start       List all vocabs start with some character.
   stat        Show vocab statistics.
@@ -69,6 +70,7 @@ Commands:
     - [ ] REPL mode?
     - [x] LLM to generate sentence/paragraph for given vocab
         - [x] Call Gemini API?
+    - [ ] Lazy loading to improve performance
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)
@@ -78,5 +80,6 @@ Commands:
 For Vietnamese:
 - https://www.tuhocielts.online/
 - https://study4.com/
+- https://zim.vn/bai-viet
 
 ### Happy learning 🐧
