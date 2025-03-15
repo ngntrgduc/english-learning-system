@@ -71,6 +71,10 @@ Commands:
     - [x] LLM to generate sentence/paragraph for given vocab
         - [x] Call Gemini API?
     - [ ] Lazy loading to improve performance
+        - [ ] https://click.palletsprojects.com/en/stable/complex/#lazily-loading-subcommands
+    - [x] Automatically display vocabs as clumns
+    - [ ] Add GIF to demo the workflow
+    - [ ] Handle multiple llm commands
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)

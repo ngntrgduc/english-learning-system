@@ -1,5 +1,4 @@
 dilation
-silver bullet
 eager
 avid
 bewilder
@@ -16,7 +15,6 @@ flaw
 astonishing
 summit
 collide
-polymath
 humane
 assure
 reassuring
@@ -87,7 +85,6 @@ faintly
 plausible
 guarantee
 distinct
-chaos
 driveway
 mitten
 dictate
@@ -121,7 +118,6 @@ suspicion
 closure
 enclosure
 precede
-perceive
 concede
 disdain
 exhaustive
@@ -147,14 +143,11 @@ seek
 refine
 controversial
 complementary
-nerd
-pet peeve
 peeve
 curvature
 sparing
 sparingly
 hesitate
-draw
 reinforce
 manifest
 distinguish
@@ -180,8 +173,6 @@ integral
 bait
 radiant
 engage
-me time
-consider
 either
 abreast
 accidentally
@@ -212,9 +203,7 @@ eminent
 phenomenal
 garrison
 internally
-time-consuming
 sustain
-underdog
 tact
 intuition
 tour de force
@@ -229,19 +218,16 @@ hilarious
 phenomenon
 tension
 sophisticated
-hypothesis
 mediocre
 infer
 manufacturing
 thusly
 niche
-therapist
 verbal
 consulting
 nostalgia
 nostalgic
 diagnostic
-attention span
 stark
 contrary
 intentionally
@@ -270,7 +256,6 @@ enhancement
 stink
 ashamed
 perceptual
-com-
 compromise
 predominant
 plateau
@@ -303,9 +288,7 @@ consequent
 inconsequential
 immense
 harshly
-walk back something
 exude
-down-to-earth
 slip up
 intricate
 distort
@@ -323,13 +306,11 @@ adequacy
 adequate
 inadequate
 yardstick
-ridiculous
 enormous
 magnitude
 counterpart
 convincing
 vitally
-push something back
 prescribing
 referentially
 tractable
@@ -345,7 +326,6 @@ rousing
 lore
 incompetent
 composure
-mesmerizing
 retract
 sensationalized
 trustworthy
@@ -434,8 +414,6 @@ tenfold
 protest
 postpone
 burdensome
-thus
-tenure
 adore
 avert
 literal
@@ -530,7 +508,6 @@ diurnal
 via
 rambling
 obsessed
-purchase
 circumstance
 develop
 confront
@@ -563,7 +540,6 @@ ever since
 rational
 irrational
 nervous
-meanwhile
 humble
 abode
 generous
@@ -586,7 +562,6 @@ influential
 essence
 loose
 distinguished
-detective work
 enigma
 antiseptic
 obscure
@@ -639,14 +614,12 @@ junk food
 impede
 hallucinate
 by-product
-reinforcement
 quay
 decay
 cherish
 alternative
 alternatively
 litter
-the generation gap
 exclaim
 soberly
 lame
@@ -688,7 +661,6 @@ heathen
 adamant
 forebear
 relinquish
-intense
 clement
 hazy
 overcast
@@ -709,15 +681,12 @@ carefree
 abusive
 intercept
 overlap
-well known
 pioneering
 factor
 perhaps
-maybe
 fossilize
 obscene
 vegetarian
-rush hour
 formerly
 takeaway
 steadily
@@ -798,12 +767,8 @@ loggerheads
 aptitude
 innate
 envy
-inflation
 likewise
 endeavour
-industry
-confidence
-confident
 devotion
 astounded
 wrinkle
@@ -815,7 +780,6 @@ weird
 genre
 leisure
 norm
-bizarre
 peculiar
 clueless
 pretentious
@@ -834,7 +798,6 @@ espionage
 altruistic
 inferior
 misprint
-sleep-deprived
 adoration
 moist
 enhanced
@@ -912,8 +875,6 @@ revelation
 propose
 proposal
 mellow
-confession
-confess
 appalling
 entitle
 mistaken
@@ -929,8 +890,6 @@ unscented
 appointment
 irritate
 reciprocate
-moving
-naive
 exquisite
 hardship
 recollect
@@ -938,7 +897,6 @@ payoff
 relive
 relieve
 dissect
-neither here nor there
 terror
 enamoured
 embrace
@@ -946,7 +904,6 @@ tenderness
 legitimate
 withhold
 acquiesce
-patch something up
 willpower
 perseverance
 afterward
@@ -971,7 +928,6 @@ rigid
 evitable
 inevitable
 aforementioned
-at all
 optimistic
 pessimistic
 punctual
@@ -981,7 +937,6 @@ obnoxious
 anticlimactic
 pursuit
 impeccable
-severe
 conspicuous
 visceral
 recuperate
@@ -1041,3 +996,10 @@ outstrip
 demure
 seniority
 sadden
+remiss
+pretension
+canal
+sanitation
+undergo
+severe
+perceive

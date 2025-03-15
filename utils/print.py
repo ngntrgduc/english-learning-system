@@ -8,20 +8,27 @@ def text_red(text: str) -> str:
 
 def print_vocabs(vocabs: list[str] | str) -> None:
     """Print vocabs with link to Cambridge dictionary"""
-    from rich import print
-
     def link(vocab) -> str:
         url = 'https://dictionary.cambridge.org/dictionary/english/'
         return f' - [link={url}{vocab.strip().replace(' ', '-')}]{vocab}[/link]'
-    
+
     if isinstance(vocabs, str):
         vocabs = [vocabs]
 
     if not isinstance(vocabs, list):
         raise ValueError('Require list of vocabs')
- 
-    for vocab in vocabs:
-        print(link(vocab))
+
+    vocabs = [link(vocab) for vocab in vocabs]
+
+    if len(vocabs) >= 10:
+        from rich.columns import Columns
+        from rich.console import Console
+        console = Console(width=80)
+        console.print(Columns(vocabs, equal=True, expand=True))
+    else:
+        from rich import print
+        for vocab in vocabs:
+            print(vocab)
 
 def print_console(text: str) -> None:
     """Print markdown format to console, used for llm response"""
