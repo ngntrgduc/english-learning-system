@@ -35,11 +35,7 @@ def llm(obj) -> None:
         return
     
     if len(obj['data']) > 5:
-        print('The number of vocab is large (>5) for this command, continue? [y/N]:')
-        answer = input()
-        if answer.lower() == 'n':
-            return
-        if answer.lower() != 'y':
+        if not click.confirm('The number of vocab is large (>5) for this command. Do you want to continue?'):
             return
     
     GEMINI_API_KEY = get_api_key()
@@ -67,7 +63,7 @@ def prompt_command(obj, prompt) -> None:
     from utils.print import print_vocabs, print_console
 
     if not prompt:
-        prompt = input('user> ')
+        prompt = click.prompt('Enter your prompt', type=str)
 
     if obj['print']:
         print_vocabs(obj['data'])
