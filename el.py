@@ -1,12 +1,6 @@
-from random import sample
 import click
 from rich import print
 
-from utils.print import text_blue, text_red, print_vocabs
-from utils.vocab import find_duplicate, is_valid_vocab
-from utils.fzf import fzf
-
-from llm import llm, prompt_command, definition
 
 data_folder = 'data'
 vocabs_file_name = 'vocabs.txt'
@@ -41,6 +35,8 @@ def check_valid_range(number: int) -> None:
 @click.pass_context
 def random(ctx, number: int) -> None:
     """Get random vocabs."""
+    from random import sample
+
     check_valid_range(number)
     ctx.obj['data'] = sample(ctx.obj['data'], number)
     ctx.obj['print'] = True
@@ -48,8 +44,11 @@ def random(ctx, number: int) -> None:
 @main.command()
 def check() -> None:
     """Check vocab file."""
+    from utils.vocab import find_duplicate
+    from utils.print import text_red
+
     print('Checking duplicated vocabs...')
-    print(find_duplicate(data))
+    print(duplicated if (duplicated := find_duplicate(data)) else [])
 
     print('Checking invalid vocabs...')
     for vocab in data:
@@ -60,6 +59,9 @@ def check() -> None:
 @click.argument('vocab', type=str)
 def add(vocab: str) -> None:
     """Add a vocab to file."""
+    from utils.vocab import is_valid_vocab
+    from utils.print import text_blue
+
     if not is_valid_vocab(vocab):
         return
 
@@ -82,6 +84,8 @@ def stat() -> None:
 @click.pass_context
 def start(ctx, character: str) -> None:
     """List all vocabs start with some character."""
+    from utils.print import text_blue
+
     assert character.isalpha(), 'Character must be in the alphabet'
 
     character = character.lower()
@@ -95,6 +99,8 @@ def start(ctx, character: str) -> None:
 @main.command()
 def delete() -> None:
     """Delete a vocab using fzf."""
+    from utils.fzf import fzf
+
     def _delete():
         for vocab in data:
             print(vocab, flush=True)
@@ -116,6 +122,8 @@ def delete() -> None:
 @click.pass_context
 def find(ctx) -> None:
     """Find vocabs using fzf."""
+    from utils.fzf import fzf
+
     def _find():
         for vocab in data:
             print(vocab, flush=True)
@@ -147,12 +155,16 @@ def tail(ctx, number: int) -> None:
 @main.result_callback()
 @click.pass_obj
 def print_to_console(obj, result, *args, **kwargs) -> None:
+    from utils.print import print_vocabs
+
     if obj['print']:
         print_vocabs(obj['data'])
 
 if __name__ == '__main__':
     # LLM commands
+    from llm import llm, prompt_command, definition
     main.add_command(llm)
     main.add_command(prompt_command)
     main.add_command(definition)
+
     main()

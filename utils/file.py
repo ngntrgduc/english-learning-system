@@ -1,9 +1,7 @@
-from collections.abc import Callable
-from functools import wraps
-from time import perf_counter
-
-def timing(func: Callable):
+def timing(func):
     """Output time taken of function"""
+    from functools import wraps
+    from time import perf_counter
 
     @wraps(func)
     def wrapper(*args, **kwargs):
