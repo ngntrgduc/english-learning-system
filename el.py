@@ -25,19 +25,13 @@ def main(ctx):
     ctx.obj.setdefault('original_length', vocab_length)
     ctx.obj.setdefault('print', False)
 
-def check_valid_range(number: int) -> None:
-    assert isinstance(number, int), 'Number must be integer'
-    if number < 1 or number > vocab_length:
-        raise ValueError('Invalid number range.')
-
 @main.command()
-@click.argument('number', type=int, default=5)
+@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
 @click.pass_context
 def random(ctx, number: int) -> None:
     """Get random vocabs."""
     from random import sample
 
-    check_valid_range(number)
     ctx.obj['data'] = sample(ctx.obj['data'], number)
     ctx.obj['print'] = True
 
@@ -135,20 +129,18 @@ def find(ctx) -> None:
     ctx.obj['print'] = True
 
 @main.command()
-@click.argument('number', type=int, default=5)
+@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
 @click.pass_context
 def head(ctx, number: int) -> None:
     """'head' functionality."""
-    check_valid_range(number)
     ctx.obj['data'] = ctx.obj['data'][:number]
     ctx.obj['print'] = True
 
 @main.command()
-@click.argument('number', type=int, default=5)
+@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
 @click.pass_context
 def tail(ctx, number: int) -> None:
     """'tail' functionality."""
-    check_valid_range(number)
     ctx.obj['data'] = ctx.obj['data'][-number:]
     ctx.obj['print'] = True
 
