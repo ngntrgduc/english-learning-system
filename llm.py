@@ -2,6 +2,9 @@ import click
 
 # https://ai.google.dev/gemini-api/docs/models/gemini
 model = 'gemini-2.0-flash'
+INSTRUCT = """Also wrap the given vocabulary in the result with square bracket, 
+                bold and italic format ([***<vocab>***]). 
+                Remember not to response with irrelevant information."""
 
 def get_api_key() -> str:
     from os import getenv
@@ -48,8 +51,7 @@ def llm(obj) -> None:
         - the definition with its word form in parentheses ()
         - 3 sentences using it
     
-        Also wrap the given vocabulary in the result with square bracket, bold and italic format (***). 
-        Remember not to response with irrelevant information.
+        {INSTRUCT}
         """
     )
     print_console(response.text)
@@ -117,7 +119,7 @@ def paragraph(obj) -> None:
         model=model, 
         contents=f"""{obj['data']},
         With given vocabs, provide a paragraph contain all the vocabs in it, with best coherence.
-        Also wrap the given vocabulary in the result with square bracket, bold and italic format (***). 
-        Remember not to response with irrelevant information."""
+        {INSTRUCT}
+        """
     )
     print_console(response.text)
