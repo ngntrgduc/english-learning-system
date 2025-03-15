@@ -26,7 +26,7 @@ def main(ctx):
     ctx.obj.setdefault('print', False)
 
 @main.command()
-@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
+@click.argument('number', type=click.IntRange(1,100), default=5)
 @click.pass_context
 def random(ctx, number: int) -> None:
     """Get random vocabs."""
@@ -129,7 +129,7 @@ def find(ctx) -> None:
     ctx.obj['print'] = True
 
 @main.command()
-@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
+@click.argument('number', type=click.IntRange(1,100), default=5)
 @click.pass_context
 def head(ctx, number: int) -> None:
     """'head' functionality."""
@@ -137,7 +137,7 @@ def head(ctx, number: int) -> None:
     ctx.obj['print'] = True
 
 @main.command()
-@click.argument('number', type=click.IntRange(1,vocab_length), default=5)
+@click.argument('number', type=click.IntRange(1,100), default=5)
 @click.pass_context
 def tail(ctx, number: int) -> None:
     """'tail' functionality."""
