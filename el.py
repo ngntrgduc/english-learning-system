@@ -66,7 +66,7 @@ def add(vocab: str) -> None:
     vocab = vocab.strip().lower()
     with open(vocabs_file_path, 'a', encoding='utf-8') as f:
         f.write(f'{vocab}\n')
-        print(f' - Added {text_blue(vocab)} to {vocabs_file_path}')
+        print(f' - Added {text_blue(vocab)} to {vocabs_file_path}.')
 
 @main.command()
 def stat() -> None:
@@ -80,12 +80,12 @@ def start(ctx, character: str) -> None:
     """List all vocabs start with some character."""
     from utils.print import text_blue
 
-    assert character.isalpha(), 'Character must be in the alphabet'
+    assert character.isalpha(), 'Character must be in the alphabet.'
 
     character = character.lower()
     list_vocabs = [vocab for vocab in data if vocab.lower().startswith(character)]
     if not list_vocabs:
-        print(f' - There are no vocabs started with {text_blue(character)}')
+        print(f' - There are no vocabs started with {text_blue(character)}.')
     else:
         ctx.obj['print'] = True
         ctx.obj['data'] = sorted(list_vocabs)
@@ -110,7 +110,7 @@ def delete() -> None:
 
             f.write(f'{vocab}\n')
 
-        print(f" - Removed '{selected_vocab}' in {vocabs_file_path}.")
+        print(f" - Removed {click.style(selected_vocab, fg='blue')} in {vocabs_file_path}.")
 
 @main.command()
 @click.pass_context
