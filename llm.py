@@ -31,9 +31,6 @@ def is_valid_obj(obj: dict) -> bool:
 @click.pass_obj
 def llm(obj) -> None:
     """Definition, word form, and sentences with given vocabs."""
-    from google import genai
-    from utils.print import print_console
-
     if not is_valid_obj(obj):
         return
     
@@ -41,6 +38,9 @@ def llm(obj) -> None:
         if not click.confirm('The number of vocab is large (>5) for this command. Do you want to continue?'):
             return
     
+    from google import genai
+    from utils.print import print_console
+
     GEMINI_API_KEY = get_api_key()
     client = genai.Client(api_key=GEMINI_API_KEY)
     response = client.models.generate_content(
@@ -88,11 +88,11 @@ def prompt_command(obj, prompt) -> None:
 @click.pass_obj
 def definition(obj) -> None:
     """Get definition of vocab."""
-    from google import genai
-    from utils.print import print_console
-
     if not is_valid_obj(obj):
         return
+
+    from google import genai
+    from utils.print import print_console
 
     GEMINI_API_KEY = get_api_key()
     client = genai.Client(api_key=GEMINI_API_KEY)
@@ -107,11 +107,11 @@ def definition(obj) -> None:
 @click.pass_obj
 def paragraph(obj) -> None:
     """Generate a paragraph with given vocab."""
-    from google import genai
-    from utils.print import print_console
-
     if not is_valid_obj(obj):
         return
+
+    from google import genai
+    from utils.print import print_console
 
     GEMINI_API_KEY = get_api_key()
     client = genai.Client(api_key=GEMINI_API_KEY)
