@@ -23,7 +23,7 @@ def print_vocabs(vocabs: list[str] | str) -> None:
     if len(vocabs) >= 10:
         from rich.columns import Columns
         from rich.console import Console
-        console = Console(width=80)
+        console = Console(width=90)
         console.print(Columns(vocabs, equal=True, expand=True))
     else:
         from rich import print
