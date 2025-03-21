@@ -61,20 +61,21 @@ def llm(obj) -> None:
 @click.pass_obj
 def prompt_command(obj, prompt) -> None:
     """Prompt whatever you want."""
-    from google import genai
     from utils.print import print_vocabs, print_console
-
-    if not prompt:
-        prompt = click.prompt('Enter your prompt', type=str)
-
+    
     if obj['print']:
         print_vocabs(obj['data'])
         obj['print'] = False
+    
+    if not prompt:
+        prompt = click.prompt('Enter your prompt', type=str)
 
     if len(obj['data']) == obj['original_length']:
         content = prompt
     else:
         content = f'{obj['data']}\n{prompt}'
+
+    from google import genai
 
     GEMINI_API_KEY = get_api_key()
     client = genai.Client(api_key=GEMINI_API_KEY)
@@ -89,7 +90,10 @@ def prompt_command(obj, prompt) -> None:
 def definition(obj) -> None:
     """Get definition of vocab."""
     if not is_valid_obj(obj):
-        return
+        vocab = click.prompt('Enter vocabs', type=str)
+        if not vocab:
+            return
+        obj['data'] = vocab
 
     from google import genai
     from utils.print import print_console
