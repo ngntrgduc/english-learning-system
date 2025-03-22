@@ -75,11 +75,19 @@ Commands:
     - [x] Automatically display vocabs as clumns
     - [ ] Add GIF to demo the workflow
     - [ ] Handle multiple llm commands
+- [ ] Generate related vocab in the data file? (using GNN maybe?)
+- [ ] Change 'vocab' variable name to to 'word' :)
+- [x] Multiple flags for different files
 
 ## Some good resources 🔥
 - [IELTS Online Tests](https://ieltsonlinetests.com/ielts-exam-library#academic-test)
 - [Dictionary Look Up](https://github.com/ngntrgduc/Dictionary-Look-Up): Browser extension for quickly look up for vocabs.
 - [The Best (and Worst) IELTS Websites - TED IELTS](https://ted-ielts.com/ielts-website-review/)
+- [7ESL Knowledge Base](https://7esl.com/)
+
+Youtube channels:
+- [English Speaking Success](https://www.youtube.com/@EnglishSpeakingSuccess)
+- [IELTS Advantage](https://www.youtube.com/@Ieltsadvantage)
 
 For Vietnamese:
 - https://www.tuhocielts.online/
