@@ -3,7 +3,8 @@ from rich import print
 
 
 data_folder = 'data'
-vocabs_file_name = 'vocabs.txt'
+# vocabs_file_name = 'vocabs.txt'
+vocabs_file_name = 'phrasal_verb.txt'
 vocabs_file_path = f'{data_folder}/{vocabs_file_name}'
 with open(vocabs_file_path, 'r', encoding='utf-8') as f:
     data = f.read().splitlines()
@@ -61,7 +62,20 @@ def add(vocab: str) -> None:
 
     if vocab in data:
         print(f' - {text_blue(vocab)} already exists in {vocabs_file_path}.')
-        return
+        if not click.confirm('Do you want to update it?', default=True, show_default=True):
+            return
+        else:
+            with open(vocabs_file_path, 'w', encoding='utf-8') as f:
+                for v in data:
+                    if v == vocab:
+                        continue
+
+                    f.write(f'{v}\n')
+
+                f.write(f'{vocab}\n')
+            print(f' - Updated {text_blue(vocab)} in {vocabs_file_path}.')
+            return
+            
     
     vocab = vocab.strip().lower()
     with open(vocabs_file_path, 'a', encoding='utf-8') as f:
@@ -143,6 +157,12 @@ def tail(ctx, number: int) -> None:
     """'tail' functionality."""
     ctx.obj['data'] = ctx.obj['data'][-number:]
     ctx.obj['print'] = True
+
+@main.command()
+def all() -> None:
+    """Display all vocabs."""
+    from utils.print import print_vocabs
+    print_vocabs(data)
 
 @main.result_callback()
 @click.pass_obj
