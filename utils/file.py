@@ -25,6 +25,12 @@ def read(file_name: str, split=False, delimiter: str = '|') -> list[str]:
     return [vocab.split(delimiter)[0].lower().strip()
             for vocab in vocabs_list]
 
+def read_data(file_path: str) -> list[str]:
+    """Read data from file and return as list of string."""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = f.read().splitlines()
+    return data
+
 def clear_file(file_name: str) -> None:
     open(file_name, 'w').close()
 
